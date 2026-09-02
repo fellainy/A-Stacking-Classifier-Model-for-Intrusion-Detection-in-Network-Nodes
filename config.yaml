@@ -1,0 +1,134 @@
+project:
+  name: CICIDS-2017 Leakage-Free Stacking IDS Reproducibility Package
+  dataset_file: Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv
+  target_column: Label
+  benign_label: BENIGN
+  attack_prefix: "Web Attack"
+  random_state: 123
+
+data_split:
+  train_size: 0.60
+  test_size: 0.40
+  stratify: true
+
+cross_validation:
+  n_splits: 10
+  shuffle: true
+  random_state: 123
+
+preprocessing:
+  replace_infinite_with_nan: true
+  imputation: median
+  scaling: minmax
+
+undersampling:
+  enabled: true
+  apply_to: training_only
+  target_benign_fraction: 0.70
+  target_attack_fraction: 0.30
+  random_state: 123
+
+boruta_compatible:
+  implementation: shadow_feature_random_forest
+  n_iterations: 5
+  n_estimators: 100
+  max_depth: null
+  class_weight: balanced
+  n_jobs: -1
+  random_state: 123
+  shadow_threshold: max
+  confirmation_rule: all_iterations
+  alpha_one_sided: 0.05
+
+baseline_models:
+  gradient_boosting:
+    enabled: true
+  decision_tree:
+    enabled: true
+  extra_trees:
+    n_estimators: 100
+    n_jobs: -1
+  random_forest:
+    n_estimators: 100
+    n_jobs: -1
+  knn:
+    n_neighbors: 5
+  mlp:
+    hidden_layer_sizes: [100]
+    max_iter: 300
+  ridge:
+    alpha: 1.0
+  naive_bayes:
+    enabled: true
+  linear_svm:
+    C: 1.0
+
+stacking:
+  selection_metric: F1
+  n_base_learners: 5
+  expected_base_learners:
+    - Gradient Boosting
+    - Random Forest
+    - Extra Trees
+    - Decision Tree
+    - k-Nearest Neighbours
+  meta_learner: XGBoost
+  meta_feature_type: out_of_fold_scores
+  decision_threshold: 0.5
+
+optuna_tpe:
+  sampler: TPESampler
+  n_trials: 20
+  cv_splits: 5
+  objective_metric: AUC
+  direction: maximize
+  random_state: 123
+  search_space:
+    n_estimators:
+      type: int
+      low: 50
+      high: 200
+    learning_rate:
+      type: float
+      low: 0.01
+      high: 0.20
+      log: true
+    max_depth:
+      type: int
+      low: 2
+      high: 8
+    subsample:
+      type: float
+      low: 0.60
+      high: 1.00
+    colsample_bytree:
+      type: float
+      low: 0.60
+      high: 1.00
+    reg_alpha:
+      type: float
+      low: 0.0001
+      high: 1.00
+      log: true
+    reg_lambda:
+      type: float
+      low: 0.10
+      high: 5.00
+      log: true
+  regenerated_best_parameters:
+    n_estimators: 144
+    learning_rate: 0.05162665105467819
+    max_depth: 2
+    subsample: 0.8653944307248673
+    colsample_bytree: 0.9158406909356689
+    reg_alpha: 0.00492522233779106
+    reg_lambda: 2.571793178625206
+  regenerated_best_cv_auc: 0.999994
+
+runtime:
+  measure_end_to_end: true
+  timer: time.perf_counter
+  hardware_reference:
+    cpu: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz
+    ram: 16 GB
+    operating_system: Windows 10 Pro 64-bit

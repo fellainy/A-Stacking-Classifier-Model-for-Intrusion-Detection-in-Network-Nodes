@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this reproducibility package, please cite the associated manuscript and acknowledge the implementation guide listed in README.md."
+title: "CICIDS-2017 Leakage-Free Stacking IDS Reproducibility Package"
+type: software
+authors:
+  - family-names: "Babatunde"
+    given-names: "Abdulrauph Olarewaju"
+  - family-names: "Balogun"
+    given-names: "Ghaniyat Bolanle"
+  - family-names: "Olugunna"
+    given-names: "Samuel Babade"
+  - family-names: "Awotunde"
+    given-names: "Joseph Bamidele"
+  - family-names: "Adeniyi"
+    given-names: "Abidemi Emmanuel"
+  - family-names: "Aroba"
+    given-names: "Oluwasegun Julius"
+version: 1.0.0
+date-released: 2026-09-02

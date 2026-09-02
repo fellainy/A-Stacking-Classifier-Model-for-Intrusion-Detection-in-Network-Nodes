@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+data/raw/*.csv
+data/splits/*.csv
+outputs/models/*.joblib
+outputs/models/*.json
+outputs/figures/*.png
+outputs/logs/*.json
