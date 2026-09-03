@@ -28,19 +28,7 @@ Download CICIDS-2017 from the Canadian Institute for Cybersecurity and place the
 data/raw/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv
 ```
 
-The raw dataset is **not redistributed** in this repository.
 
-Expected original distribution:
-
-| Label | Records |
-|---|---:|
-| BENIGN | 168,186 |
-| Web Attack – Brute Force | 1,507 |
-| Web Attack – XSS | 652 |
-| Web Attack – Sql Injection | 21 |
-| **Total** | **170,366** |
-
-The three Web Attack labels are merged into one `Attack=1` class; BENIGN is `0`.
 
 ## Folder structure
 
