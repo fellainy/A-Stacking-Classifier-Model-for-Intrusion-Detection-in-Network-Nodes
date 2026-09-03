@@ -109,19 +109,6 @@ For every outer fold, imputation, undersampling, shadow-feature selection, and s
 ### Stage 3 — OOF stacking + TPE
 The five best development-set classifiers are selected by mean F1. Their OOF scores form the five-column level-1 matrix. The XGBoost meta-learner is tuned exclusively on this training-derived matrix.
 
-The configured TPE search space is:
-
-| Parameter | Search space |
-|---|---|
-| `n_estimators` | integer 50–200 |
-| `learning_rate` | log-uniform 0.01–0.20 |
-| `max_depth` | integer 2–8 |
-| `subsample` | uniform 0.60–1.00 |
-| `colsample_bytree` | uniform 0.60–1.00 |
-| `reg_alpha` | log-uniform 0.0001–1.00 |
-| `reg_lambda` | log-uniform 0.10–5.00 |
-
-The regenerated optimal configuration recorded in the revised results was:
 
 ```yaml
 n_estimators: 144
@@ -142,17 +129,6 @@ The pipeline is frozen and refit using development data. The test partition is t
 Produces publication-ready PNG figures from the rerun outputs.
 
 ## Reference regenerated results
-
-The `outputs/reference_results/` directory contains snapshots from the leakage-free rerun used to revise the manuscript. The principal stacking independent-test result was:
-
-- Accuracy: **0.999765** (99.9765%)
-- AUC: **0.999970**
-- Recall: **0.988532**
-- Precision: **0.993088**
-- F1: **0.990805**
-- Cohen's Kappa: **0.990686**
-- MCC: **0.990688**
-- Confusion matrix: **TN=67,269; FP=6; FN=10; TP=862**
 
 Run:
 
